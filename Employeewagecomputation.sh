@@ -1,6 +1,5 @@
-#! /bin/bash -x
+#/bin/bash -x
 echo "Welcome to Employee wage computation"
-
 #constant
 WAGE_PER_HOUR=20
 FULL_DAY_HOUR=8
@@ -10,7 +9,7 @@ NUMBER_OF_DAYS=20
 IS_PRESENT=1
 
 #VARIABLE
-empcheck=$(( RANDOM%2 ))
+empcheck=$((RANDOM%2+1))
 numberofdays=20
 totalworkingdays=0
 totalEmpHrs=0
@@ -18,9 +17,12 @@ day=1
 
 #checking if employee is present or absent
 
-if [ $empcheck -eq $IS_PRESENT ]
+if (( $empcheck == $IS_PRESENT )) 
 then
-        echo "Employee is present"
+        echo "Employee is present\n"
+        calculateDailyEmployeewage=$(($WAGE_PER_HOUR*$FULL_DAY_HOUR))
+        echo "Daily wages is : $calculateDailyEmployeewage \n"
 else
-        echo "Employee is absent"
+        echo "Employee is absent\n"
 fi
+
