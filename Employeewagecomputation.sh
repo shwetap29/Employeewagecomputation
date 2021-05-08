@@ -3,25 +3,26 @@ echo "Welcome to Employee wage computation"
 #constant
 WAGE_PER_HOUR=20
 FULL_DAY_HOUR=8
-#PART_TIME_HOUR=4
-NUMBER_OF_HOUR=100
-NUMBER_OF_DAYS=20
+PART_TIME_HOUR=4
 IS_PRESENT=1
-
-#VARIABLE
 empcheck=$((RANDOM%2+1))
-numberofdays=20
-totalworkingdays=0
-totalEmpHrs=0
-day=1
 
-#checking if employee is present or absent
 
 if (( $empcheck == $IS_PRESENT )) 
 then
         echo "Employee is present\n"
-        calculateDailyEmployeewage=$(($WAGE_PER_HOUR*$FULL_DAY_HOUR))
-        echo "Daily wages is : $calculateDailyEmployeewage \n"
+        
+        checkingschedule=$((RANDOM%2+1))
+        if(( $checkingschedule == 1 ))
+         then
+         calculateDailyEmployeewage=$(($WAGE_PER_HOUR*$FULL_DAY_HOUR))
+         echo "Daily wages is : $calculateDailyEmployeewage \n"
+fi
+          if(( $checkingschedule == 2 ))
+         then
+         calculateparttime=$(($WAGE_PER_HOUR*$FULL_DAY_HOUR))
+        echo "part time employee wage : $calculateparttime \n"
+fi
 else
         echo "Employee is absent\n"
 fi
