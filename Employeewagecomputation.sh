@@ -5,25 +5,30 @@ WAGE_PER_HOUR=20
 FULL_DAY_HOUR=8
 PART_TIME_HOUR=4
 IS_PRESENT=1
-empcheck=$((RANDOM%2+1))
+NUMBER_OF_WORKING_DAYS=20
+countfulltime=0
+countparttime=0
+countabsent=0
+for(( day=1; day<= $NUMBER_OF_WORKING_DAYS ; day++ ))
+do
+      empcheck=$((RANDOM%3+1))
 
+      #using case statement
+       case $empcheck in
+     1) 
+             calculateDailyEmployeewage=$(($WAGE_PER_HOUR*$FULL_DAY_HOUR))
+             countfulltime=$((countfulltime+1))
+              ;;
 
-if (( $empcheck == $IS_PRESENT )) 
-then
-        echo "Employee is present\n"
-        
-        checkingschedule=$((RANDOM%2+1))
-        if(( $checkingschedule == 1 ))
-         then
-         calculateDailyEmployeewage=$(($WAGE_PER_HOUR*$FULL_DAY_HOUR))
-         echo "Daily wages is : $calculateDailyEmployeewage \n"
-fi
-          if(( $checkingschedule == 2 ))
-         then
-         calculateparttime=$(($WAGE_PER_HOUR*$FULL_DAY_HOUR))
-        echo "part time employee wage : $calculateparttime \n"
-fi
-else
-        echo "Employee is absent\n"
-fi
-
+      2)
+              calculateparttime=$(($WAGE_PER_HOUR*$FULL_DAY_HOUR))
+               countparttime=$((countparttime+1))
+                ;;
+      3) 
+              countabsent=$((countabsent+1))
+             ;;
+  esac
+done
+echo "full time $countfulltime days employee wage :$(( calculateDailyEmployeewage*$countfulltime))"
+echo "part time $countparttime days employee wage :$(( calculateDailyEmployeewage*$countparttime))"
+echo "absent $countabsent days"
