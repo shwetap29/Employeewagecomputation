@@ -10,6 +10,7 @@ NUMBER_OF_DAYS=20
 numberOfDays=20
 totalWorkingDays=0
 totalEmpHrs=0
+day=1
 #Using function
 function getWorkingHours()
 {
@@ -43,8 +44,12 @@ do
    empHrs="$( getWorkingHours $((RANDOM%3+1)) )"
 	totalEmpHrs=$(($totalEmpHrs+$empHrs))	# Total employee hour
         empDailyWage[$totalWorkingDays]="$(calcDailyWage $empHrs)"
+        day=$((day+1))
 done
     totalSalary=$(($totalEmpHrs*$numberOfDays))
     echo "Total Salary is : ${empDailyWage[@]}"
-
-
+#printing key
+for day in ${!empDailyWage[@]}
+do
+    printf "$day : ${empDailyWage[$day]} \n"
+done
